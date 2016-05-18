@@ -12,6 +12,7 @@ describe('heckler', function() {
 });
 
 describe('heckler public interface', function() {
+
   describe('#passMockObject', function() {
     it('should accept an array of objects', function() {
       var queries = [{query: 'abc', result: []}];
@@ -20,7 +21,11 @@ describe('heckler public interface', function() {
       expect(connection.sqlMock).to.deep.equal(queries)
     })
   })
+
   describe('#createConnection', function() {
+    it('should emit an event when the connection is established', function(done) {
+      heckler.createConnection().on('connection', done.bind(done, null))
+    })
     it('should return an object with #query, #connect, #release, #destroy and #end', function() {
       var connection = heckler.createConnection()
       expect(connection.query).to.be.ok
@@ -30,7 +35,18 @@ describe('heckler public interface', function() {
       expect(connection.end).to.be.ok
     })
   })
+
   describe('#createPool', function() {
+    it('should emit an event when the pool is established', function(done) {
+      var pool = heckler.createPool({
+        connectionLimit: 30,
+        host: 'someaddress',
+        user: 'someusername',
+        password: 'somepassword',
+        database: 'somedatabase',
+        port: 'someport'
+      }).on('connection', done.bind(done, null))
+    })
     it('should return an object with #getConnection', function() {
       expect(heckler.createPool({
         connectionLimit: 30,
@@ -41,8 +57,9 @@ describe('heckler public interface', function() {
         port: 'someport'
       }).getConnection).to.be.an.instanceof(Function);
     })
+
     describe('#getConnection', function() {
-      it('should return an object of type mysqlConnectionMock', function() {
+      it('should return a connection object', function() {
         heckler.createPool({
           connectionLimit: 30,
           host: 'someaddress',
@@ -60,32 +77,6 @@ describe('heckler public interface', function() {
       })
     })
   })
-});
-
-describe('heckler pool', function() {
-  it('should create a pool', function() {
-    expect(heckler.createPool({
-      connectionLimit: 30,
-      host: 'someaddress',
-      user: 'someusername',
-      password: 'somepassword',
-      database: 'somedatabase',
-      port: 'someport'
-    })).to.be.ok;
-  });
-});
-
-describe('heckler pool.getConnection', function() {
-  it('should create and pass pool connection object via callback', function(done) {
-    heckler.createPool({
-      connectionLimit: 30,
-      host: 'someaddress',
-      user: 'someusername',
-      password: 'somepassword',
-      database: 'somedatabase',
-      port: 'someport'
-    }).getConnection(done);
-  });
 });
 
 describe('heckler queries', function() {

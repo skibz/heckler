@@ -1,8 +1,8 @@
 
 'use strict';
 
-var mysqlPoolMock = require('./lib/mysqlPoolMock.js');
-var mysqlConnectionMock = require('./lib/mysqlConnectionMock.js');
+var pool = require('./lib/pool.js');
+var connection = require('./lib/connection.js');
 
 var sqlMock = [];
 
@@ -18,7 +18,7 @@ exports.passMockObject = function(mockObj) {
  * @public
  */
 exports.createConnection = function(config) {
-  return new mysqlConnectionMock(config, sqlMock)
+  return new connection(config, sqlMock)
 };
 
 /**
@@ -27,5 +27,5 @@ exports.createConnection = function(config) {
  * @public
  */
 exports.createPool = function(config) {
-  return new mysqlPoolMock(config, sqlMock);
+  return new pool(config, sqlMock);
 };
