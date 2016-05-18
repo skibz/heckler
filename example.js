@@ -1,21 +1,16 @@
-/**
- * Created by lynmatten on 12.09.15.
- */
 
+'use strict'
 
 var mysqlMock = require('./index.js');
-
 var mockObj = [
-
-    {
-        "Query": "SELECT * FROM tblConfig",
-        "Answer": [{
-            "id": 1,
-            "version_major": 0,
-            "version_minor": 2
-        }]
-    }
-
+  {
+    'Query': 'SELECT * FROM tblConfig',
+    'Answer': [{
+      'id': 1,
+      'version_major': 0,
+      'version_minor': 2
+    }]
+  }
 ];
 
 mysqlMock.passMockObject(mockObj);

@@ -1,7 +1,7 @@
 {
-  "name": "mysql-mock-node",
-  "version": "0.0.7",
-  "description": "mocking module for mysql based module testing",
+  "name": "heckler",
+  "version": "0.0.0",
+  "description": "mock node's mysql module for testing",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -12,19 +12,17 @@
     "test"
   ],
   "author": {
-   "name": "Lyn Matten",
-    "email": "matten@lm-consult.com"
+    "name": "Ant Cosentino",
+    "email": "ant@io.co.za"
   },
-  "license": "GNU GPL V3",
-  "dependencies": {
-    "mysql": "^2.9.0",
-    "q": "^1.4.1"
-  },
+  "license": "GPL-3.0",
+  "dependencies": {},
   "devDependencies": {
-    "chai": "^3.4.0"
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/solick/mysql-mock"
+    "url": "https://github.com/skibz/heckler"
   }
 }
