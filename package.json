@@ -1,6 +1,6 @@
 {
   "name": "heckler",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "mock node's mysql module for testing",
   "main": "index.js",
   "scripts": {
