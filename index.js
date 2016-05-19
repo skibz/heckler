@@ -4,11 +4,11 @@
 var pool = require('./lib/pool.js');
 var connection = require('./lib/connection.js');
 
-var sqlMock = [];
+var _sqlMock = [];
 
 exports.passMockObject = function(mockObj) {
   if (mockObj != undefined && Array.isArray(mockObj)) {
-    sqlMock = mockObj;
+    _sqlMock = mockObj;
   }
 };
 
@@ -17,8 +17,8 @@ exports.passMockObject = function(mockObj) {
  * @param {object} config
  * @public
  */
-exports.createConnection = function(config) {
-  return new connection(config, sqlMock)
+exports.createConnection = function(config, sqlMock) {
+  return new connection(config, sqlMock || _sqlMock)
 };
 
 /**
@@ -26,6 +26,6 @@ exports.createConnection = function(config) {
  * @param {object} config
  * @public
  */
-exports.createPool = function(config) {
-  return new pool(config, sqlMock);
+exports.createPool = function(config, sqlMock) {
+  return new pool(config, sqlMock || _sqlMock);
 };
